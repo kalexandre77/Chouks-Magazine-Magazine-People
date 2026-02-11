@@ -1,1 +1,0 @@
-# Chouks-Magazine-Magazine-People
