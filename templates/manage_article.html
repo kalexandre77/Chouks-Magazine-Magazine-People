@@ -1,0 +1,56 @@
+{% extends 'admin.html' %}
+{% block title %}Article Management{% endblock %}
+{% block content %}
+<h2>Centre de management</h2>
+<ul>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+    <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+    <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+    <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+    <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+</ul>
+
+<form method="POST">
+    <h3>Ajouter un article</article></h3>
+    <input type="hidden" name="action" value= "add_article">
+    <input type="text" name="Titre" placeholder= "Titre">
+    <input type="number" name="Num_page" placeholder= "Numéro de page">
+    <input type="text" name="Resume" placeholder= "Résumé">
+    <input type="number" name="Num_revue" placeholder = "Numéro de revue">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Article dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_article</th>
+            <th>Titre</th>
+            <th>Numéro page</th>
+            <th>Resume</th>
+            <th>Numéro revue</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for art in article %}
+    <tr>
+    <td>({{ art.id_article }})</td>
+    <td>{{ art.titre }}</td>
+    <td>{{ art.num_page_article }} </td>
+    <td>{{ art.resume_ }}</td> 
+    <td>{{ art.numero_revue }}</td>
+    <td> 
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete_article">
+            <input type="hidden" name="id_article" value="{{ art.id_article }}">
+            <button type="submit" name = "delete_article">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

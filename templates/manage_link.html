@@ -1,0 +1,118 @@
+{% extends 'admin.html' %}
+{% block title %}Article Management{% endblock %}
+{% block content %}
+<h2>Centre de management</h2>
+<ul>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+    <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+    <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+    <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+    <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+</ul>
+
+<form method="POST" style ="display: inline;">
+    <h3>Ajouter un lien Musique</article></h3>
+    <input type="hidden" name="action" value= "add_musique">
+    <input type="number" name="id_artiste" placeholder= "ID artiste">
+    <input type="number" name="id_album" placeholder= "ID album">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Lien Musique dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_artiste</th>
+            <th>id_album</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for mus in musique %}
+    <tr>
+    <td>{{ mus.id_artiste}}</td>
+    <td>{{ mus.id_album}}</td>
+    <td> 
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete_musique">
+            <input type="hidden" name="id_artiste" value="{{mus.id_artiste}}">
+            <input type="hidden" name="id_album" value="{{mus.id_album}}">
+            <button type="submit" name = "delete_article">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+    <form method="POST" style ="display: inline;">
+        <h3>Ajouter un lien Acting</article></h3>
+        <input type="hidden" name="action" value= "add_acting">
+        <input type="number" name="visa" placeholder= "Visa">
+        <input type="number" name="id_acteur" placeholder= "ID acteur">
+        <button type="submit">Ajouter</button>
+    </form>
+    
+    <h3>Lien Acting dans la base de données</h3>
+    
+<table border="1">
+    <thead>
+        <tr>
+            <th>Visa</th>
+            <th>id_acteur</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for act in acting %}
+    <tr>
+    <td>{{ act.visa }}</td>
+    <td>{{ act.id_acteur}}</td>
+    <td> 
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete_acting">
+            <input type="hidden" name="visa" value="{{act.visa}}">
+            <input type="hidden" name="id_acteur" value="{{act.id_acteur}}">
+            <button type="submit" name = "delete_article">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form method="POST" style ="display: inline;">
+    <h3>Ajouter un lien Mannequinnat</article></h3>
+    <input type="hidden" name="action" value= "add_mannequinat">
+    <input type="number" name="id_mannequin" placeholder= "ID mannequin">
+    <input type="number" name="id_defile" placeholder= "ID defile">
+    <button type="submit">Ajouter</button>
+</form>
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_mannequin</th>
+            <th>id_defile</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for man in mannequinat %}
+    <tr>
+    <td>{{ man.id_mannequin }}</td>
+    <td>{{ man.id_defile}}</td>
+    <td> 
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete_mannequinat">
+            <input type="hidden" name="id_mannequin" value="{{ man.id_mannequin }}">
+            <input type="hidden" name="id_defile" value="{{ man.id_defile}}">
+            <button type="submit" name = "delete_article">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

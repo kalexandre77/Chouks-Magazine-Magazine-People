@@ -1,0 +1,30 @@
+{% extends 'admin.html' %}
+
+{% block title %}Tableau de bord{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenue sur le tableau de bord, {{ session['user'] }} !</h1>
+
+<div class="dashboard-menu">
+    <ul>
+        <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+        <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+        <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+        <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+        <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+        <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+        <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+    </ul>
+</div>
+
+<div class="dashboard-content">
+    <h3>Statistiques</h3>
+    <ul>
+        <li><strong>Total des VIPs :</strong> {{ total_vips }}</li>
+        <li><strong>Nombre d'articles :</strong> {{ total_articles }}</li>
+        <li><strong>Photos publiées :</strong> {{ total_photos }}</li>
+    </ul>
+</div>
+
+{% endblock %}

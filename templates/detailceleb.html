@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Détails du VIP</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* En-tête identique à l'accueil */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .header img {
+            height: 120px; /* Ajusté pour correspondre à l'accueil */
+            width: auto;
+        }
+
+        .header h1 {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 60px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            color: black;
+        }
+
+        /* Styles pour les liens de navigation */
+        nav a {
+            color: #800020; /* Bordeaux foncé par défaut */
+            text-decoration: none !important; /* Supprime le soulignement */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0 10px;
+    
+        }
+
+        nav a:hover {
+            color: #C08081;
+            text-decoration: none !important;
+        }
+
+        /* Texte pour le contenu central */
+        .content-container {
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        /* Ajustements des cartes */
+        .card-celeb {
+            border: 2px solid #800020;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            height: 700px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-celeb:hover {
+            transform: scale(1.05);
+        }
+
+        .celeb-photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        .celeb-name {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #555;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>Chouks Magazine</h1>
+        <img src="../static/abloh.png" alt="Logo">
+    </div>
+
+    <nav style="text-align: center;">
+        <a href="/accueil">accueil</a>
+        <a href="/celebrites">célébrités</a>
+        <a href="/revue">Revue</a>
+        <a href="/film">film</a>
+        <a href="/album">album</a>
+        <a href="/defile">défilé</a>
+        <a href="/photo">photo</a>
+        <a href="/admin">admin</a>
+    </nav>
+
+    <div class="content-container">
+        <p class="text-center search-text"> Details de la célébrité : </p>
+
+        <div class="card card-celeb"> 
+        <h2>{{ vip_details[1] }} {{ vip_details[0] }}</h2> 
+        <p><strong>Sexe :</strong> {{ vip_details[2] }}</p>
+        <p><strong>Nationalité :</strong> {{ vip_details[3] }}</p>
+        <p><strong>Date de naissance :</strong> {{ vip_details[4] }}</p>
+        {% if vip_details[5] %}
+            <p><strong>Date de décès :</strong> {{ vip_details[5] }}</p>
+        {% endif %}
+
+        <div class="albums">
+            <p><strong>Albums :</strong>
+            {% if albums %}
+                <ul>
+                    {% for album in albums %}
+                        <li>{{ album[0] }} ({{ album[1] }}) - {{ album[2] }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">Aucun album trouvé pour ce VIP.</p>
+            {% endif %}
+        </div>
+
+        <div class="photos">
+            <p><strong>photos :</strong>
+            {% if photos %}
+                <div class="d-flex flex-wrap">
+                    {% for photo in photos %}
+                        <img src="/path/to/photos/{{ photo[0] }}.jpg" alt="Photo {{ photo[0] }}" style="width:200px;">
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="no-data">Aucune photo disponible pour ce VIP.</p>
+            {% endif %}
+        </div>
+
+        <div class="films">
+            <p><strong>films :</strong>
+            {% if films %}
+                <ul>
+                    {% for film in films %}
+                        <li>{{ film[0] }} ({{ film[1] }}) </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">Aucun film trouvé pour ce VIP.</p>
+            {% endif %}
+        </div>
+
+        <div class="defiles">
+            <p><strong>défilés :</strong>
+            {% if defiles %}
+                <ul>
+                    {% for defile in defiles %}
+                        <li>{{ defile[0] }} ({{ defile[1] }}) </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">Aucun défilé trouvé pour ce VIP.</p>
+            {% endif %}
+        </div>
+
+        <div class="mariages">
+            <p><strong>mariages :</strong>
+            {% if mariages %}
+                <ul>
+                    {% for mariage in mariages %}
+                        <li>avec {{ mariage.conjoint }} à {{ mariage.lieu_mariage }} le {{ mariage.date_mariage }}{{ mariage.divorce_info }} </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">Aucun mariage trouvé pour ce VIP.</p>
+            {% endif %}
+        </div>
+
+        <div class="liaisons">
+            <p><strong>liaisons :</strong>
+            {% if liaisons %}
+                <ul>
+                    {% for liaison in liaisons %}
+                        <li>avec {{ liaison.liaison }} depuis le {{ liaison.date_annonce }}</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p class="no-data">Aucune liaison trouvée pour ce VIP.</p>
+            {% endif %}
+        </div>
+        
+        
+        
+
+
+
+
+     </div>
+    </div>
+</body>
+</html>

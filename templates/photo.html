@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Chouks Magazine - Défilés</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        /* En-tête identique à l'accueil */
+        .header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 25px;
+        }
+
+        .header img {
+            height: 120px; /* Ajusté pour correspondre à l'accueil */
+            width: auto;
+        }
+
+        .header h1 {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 60px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0;
+            color: black;
+        }
+
+        /* Styles pour les liens de navigation */
+        nav a {
+            color: #800020; /* Bordeaux foncé par défaut */
+            text-decoration: none; /* Supprime le soulignement */
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            color: #C08081;
+        }
+
+        /* Texte pour le contenu central */
+        .content-container {
+            margin: 40px auto;
+            max-width: 1200px;
+        }
+
+        /* Ajustements des cartes */
+        .card-celeb {
+            border: 2px solid #800020;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card-celeb:hover {
+            transform: scale(1.05);
+        }
+
+        .celeb-photo {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 8px;
+        }
+
+        .celeb-name {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+        }
+
+        .intro-text {
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            color: #555;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <!-- En-tête identique à Accueil -->
+    <div class="header">
+        <h1>Chouks Magazine</h1>
+        <img src="static/abloh.png" alt="Logo">
+    </div>
+
+    <!-- Barre de navigation identique -->
+    <nav class="text-center">
+        <a href="accueil">Accueil</a>
+        <a href="celebrites">Célébrités</a>
+        <a href="revue">Revue</a>
+        <a href="film">Film</a>
+        <a href="album">Album</a>
+        <a href="defile">Défilé</a>
+        <a href="photo">Photo</a>
+        <a href="admin">Admin</a>
+    </nav>
+
+
+   
+    <div class="content-container">
+
+        <p class="text-center search-text"> Voici les photos repertoriées.</p>
+
+       
+        <div class="container">
+            <div class="row g-4">
+                {% if lst_film %}
+                    {% for film in lst_film %}
+                        <div class="col-sm-6 col-md-4 col-lg-3">
+                            <div class="card card-celeb">
+                                
+                                <img src="static/anonyme.jpg" class="celeb-photo" alt="film">
+                        
+                             
+                                <div class="celeb-name">
+        
+                                    <h5> Id_photo : {{ photo[0] }} </h5> 
+                                    <p><strong> Date : </strong> {{ [2] }} </p>
+                               
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="col-12 text-center">
+                        <p>Aucune photo n'a été trouvée dans la base de données.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

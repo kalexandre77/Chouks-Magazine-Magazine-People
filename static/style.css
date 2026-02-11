@@ -1,0 +1,73 @@
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px; /* Ajoute un espacement entre le titre et l'image */
+    margin-top: 25px; /* Ajoute un espace en haut */
+}
+
+.header img {
+    height: 120px; /* Ajustez la taille de l'image selon vos besoins */
+    width: auto; /* Conserve les proportions de l'image */
+}
+
+.header h1 {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 60px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0; /* Supprime les marges internes */
+    color: black; /* Change la couleur du titre en noir */
+}
+
+/* Styles pour les liens de navigation */
+nav a {
+    color: #800020; /* Bordeaux foncé par défaut */
+    text-decoration: none; /* Supprime le soulignement */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    color: #C08081; /* Bordeaux clair au survol */
+}
+
+.btn-primary {
+    background-color: #800020; /* Bordeaux foncé */
+    border-color: #800020; /* Bordeaux foncé */
+}
+
+.btn-primary:hover {
+    background-color: #C08081; /* Bordeaux clair au survol */
+    border-color: #C08081; /* Bordeaux clair au survol */
+}
+
+/* Styles pour le texte de présentation */
+.search-text,
+.intro-text {
+    color: grey; /* Change la couleur du texte en noir */
+    font-size: 16px; /* Réduit la taille de la police */
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Même police que celle de "Rechercher" */
+    letter-spacing: 1px; /* Ajout d'un léger espacement */
+    margin-bottom: 20px; /* Ajoute un espacement sous le texte */
+}
+
+/* Ajout d'un espacement avant le texte introductif */
+.intro-text {
+    margin-top: 30px;
+}
+
+/* Style pour l'image centrée avec un ratio de 7:5 */
+.center-image {
+    display: block;
+    margin: 20px auto; /* Centrage de l'image avec un espace autour */
+    width: 50%; /* Largeur de l'image, ajustez selon vos besoins */
+    max-width: 700px; /* Taille maximale de l'image */
+    height: auto;
+}

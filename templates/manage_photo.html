@@ -1,0 +1,59 @@
+{% extends 'admin.html' %}
+{% block title %}Photo Management{% endblock %}
+{% block content %}
+<h2>Centre de management</h2>
+<ul>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+    <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+    <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+    <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+    <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+</ul>
+<form method="POST">
+    <h3>Ajouter une photo</article></h3>
+    <input type="hidden" name="action" value="add_photo">
+    <input type="text" name="Vers_num" placeholder="Lien de la photo">
+    <input type="text" name="date_photo" placeholder="Date de photographie">
+    <input type="text" name="nom_photographe" placeholder="Nom du photographe">
+    <input type="text" name="agence_photo" placeholder = "Agence photo">
+    <input type="text" name="circonstance_photo" placeholder = "Circonstance\Contexte">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Photo dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_photo</th>
+            <th>Lien de la photo</th>
+            <th>Date de photographie</th>
+            <th>Nom du photographe</th>
+            <th>Agence</th>
+            <th>Circonstance\Contexte</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for photo in photo %}
+    <tr>
+    <td>({{ photo.id_photo }})</td>
+    <td>{{ photo.version_numerise }}</td>
+    <td>{{ photo.date_photo}} </td>
+    <td>{{ photo.nom_photographe }}</td>
+    <td>{{ photo.agence_photo}}</td> 
+    <td>{{ photo.circonstance_photo }}</td>
+    <td> 
+        <form method="GET" style="display:inline;">
+            <input type="hidden" name="action" value="delete_photo">
+            <input type="hidden" name="id_photo" value="{{photo.id_photo }}">
+            <button type="submit" name ="delete_photo">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

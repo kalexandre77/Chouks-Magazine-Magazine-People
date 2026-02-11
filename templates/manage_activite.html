@@ -1,0 +1,163 @@
+{% extends 'admin.html' %}
+{% block title %}Activités Management{% endblock %}
+{% block content %}
+<h2>Centre de management des Activités</h2>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+    <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+    <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+    <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+    <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+
+<h3>Ajouter un Album</h3>
+<form method="POST">
+    <input type="hidden" name="action" value="add_album">
+    <input type="text" name="titre" placeholder="Titre">
+    <input type="text" name="date_rea" placeholder="Date de réalisation">
+    <input type="text" name="nommaisondisque" placeholder="Nom de la maison de disque">
+    <input type="number" name="id_vip" placeholder=" VIP">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Mettre à jour un Album</h3>
+<form method="POST">
+    <input type="hidden" name="action" value="update_album">
+    <input type="number" name="id_album" placeholder="ID Album">
+    <input type="text" name="titre" placeholder="Titre">
+    <input type="text" name="date_rea" placeholder="Date de réalisation">
+    <input type="text" name="nommaisondisque" placeholder="Nom de la maison de disque">
+    <input type="number" name="id_vip" placeholder="VIP">
+    <button type="submit">Update</button>
+</form>
+
+<h3>Albums dans la base de données</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Album</th>
+            <th>Titre</th>
+            <th>Date de réalisation</th>
+            <th>Nom de la maison de disque</th>
+            <th>ID VIP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for album in albums %}
+        <tr>
+            <td>{{( album.id_album )}}</td>
+            <td>{{ album.titre }}</td>
+            <td>{{ album.date_rea }}</td>
+            <td>{{ album.nommaisondisque }}</td>
+            <td>{{ album.id_vip }}</td>
+            <td>
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="action" value="delete_album">
+                    <input type="hidden" name="id_album" value="{{ album.id_album }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Ajouter un Défilé</h3>
+<form method="POST">
+    <input type="hidden" name="action" value="add_defile">
+    <input type="text" name="lieu" placeholder="Lieu">
+    <input type="text" name="date_defile" placeholder="Date du défilé">
+    <input type="number" name="id_vip" placeholder="ID VIP">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Mettre à jour un Défilé</h3>
+<form method="post">
+    <input type="hidden" name="action" value="update_defile">
+    <input type="number" name="id_defile" placeholder="ID Défilé">
+    <input type="text" name="lieu" placeholder="Lieu">
+    <input type="text" name="date_defile" placeholder="Date du défilé">
+    <input type="number" name="id_vip" placeholder="VIP">
+    <button type="submit">Mettre à jour</button>
+</form>
+
+<h3>Défilés dans la base de données</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Défilé</th>
+            <th>Lieu</th>
+            <th>Date</th>
+            <th>ID VIP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for defile in defile %}
+        <tr>
+            <td>{{( defile.id_defile )}}</td>
+            <td>{{ defile.lieu }}</td>
+            <td>{{ defile.date }}</td>
+            <td>{{ defile.id_vip }}</td>
+            <td>
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="action" value="delete_defile">
+                    <input type="hidden" name="id_defile" value="{{ defile.id_defile }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h3>Ajouter un Film</h3>
+<p>Warning : l'ajout du visa n'est pas automatique</p>
+<form method="POST">
+    
+    <input type="hidden" name="action" value="add_film">
+    <input type="number" name="visa" placeholder="Visa">
+    <input type="text" name="date_realisation" placeholder="Date de réalisation">
+    <input type="text" name="titre" placeholder="Titre">
+    <input type="number" name="id_vip" placeholder="ID VIP">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Mettre à jour un Film</h3>
+<form method="POST">
+    <input type="hidden" name="action" value="update_film">
+    <input type="number" name="visa" placeholder="Visa">
+    <input type="text" name="date_realisation" placeholder="Date de réalisation">
+    <input type="text" name="titre" placeholder="Titre">
+    <input type="number" name="id_vip" placeholder="ID VIP">
+    <button type="submit">Update</button>
+</form>
+
+<h3>Films dans la base de données</h3>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Visa</th>
+            <th>Date de réalisation</th>
+            <th>Titre</th>
+            <th>ID VIP</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for film in film %}
+        <tr>
+            <td>{{( film.visa )}}</td>
+            <td>{{ film.date_real }}</td>
+            <td>{{ film.titre }}</td>
+            <td>{{ film.id_vip }}</td>
+            <td>
+                <form method="POST" style="display:inline;">
+                    <input type="hidden" name="action" value="delete_film">
+                    <input type="hidden" name="visa" value="{{ film.visa }}">
+                    <button type="submit">Supprimer</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

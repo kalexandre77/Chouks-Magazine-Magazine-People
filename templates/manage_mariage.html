@@ -1,0 +1,93 @@
+{% extends 'admin.html' %}
+{% block title %}Mariage\Liaison Management{% endblock %}
+{% block content %}
+<h2>Centre de management</h2>
+<ul>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage') }}">Gérer les VIP</a></li>
+    <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+    <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+    <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+    <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+</ul>
+
+<form method="POST">
+    <h3>Ajouter un mariage</article></h3>
+    <input type="hidden" name="action" value="add_mariage">
+    <input type="text" name="date_mariage" placeholder="Date de mariage">
+    <input type="text" name="lieu_mariage" placeholder="Lieu de Mariage">
+    <input type="text" name="circonstance_separation" placeholder="Circonstance Mariage">
+    <input type="number" name="id_vip_1" placeholder = "VIP1">
+    <input type="number" name="id_vip_2" placeholder = "VIP2">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Mariage dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_mariage</th>
+            <th>Date de Mariage</th>
+            <th>Lieu de Mariage</th>
+            <th>Date de Séparation</th>
+            <th>Circonstance Mariage</th>
+            <th>VIP1</th>
+            <th>VIP2</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for mariage in mariage %}
+    <tr>
+    <td>({{mariage.id_mariage }})</td>
+    <td>{{ mariage.date_mariage }}</td>
+    <td>{{ mariage.lieu_mariage }} </td>
+    <td>{{ mariage.date_separation }}</td>
+    <td>{{ mariage.circonstance_separation }}</td> 
+    <td>{{ mariage.id_vip_1 }}</td>
+    <td>{{ mariage.id_vip_2 }}</td>
+    <td> 
+        <form method="POST" style="display:inline;">
+            <input type="hidden" name="action" value="delete_mariage">
+            <input type="hidden" name="id_photo" value="{{ mariage.id_mariage }}">
+            <button type="submit" name ="delete_mariage">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<form method="POST">
+    <h3>Ajouter une Liaison</article></h3>
+    <input type="hidden" name="action" value="add_liaison">
+    <input type="text" name="id_vip" placeholder="VIP">
+    <input type="text" name="id_vip_liaison" placeholder="VIP de la liaison">
+    <input type="text" name="date_annonce" placeholder="Date d'annonce">
+    <button type="submit">Ajouter</button>
+</form>
+
+<h3>Liaison dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>VIP</th>
+            <th>VIP de la liasion</th>
+            <th>date d'annonce</th>
+        </tr>
+    </thead>
+    <tbody>
+
+    {% for liaison in liaison %}
+    <tr>
+    <td>({{ liaison.id_vip }})</td>
+    <td>({{ liaison.id_vip_liaison }})</td>
+    <td>{{ liaison.date_annonce }} </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% extends 'admin.html' %}
+{% block title %}VIP management{% endblock %}
+{% block content %}
+<h2>Centre de management</h2>
+    <li><a href="{{ url_for('dashboard') }}">Tableau de bord</a></li>
+    <li><a href="{{ url_for('manage_photo') }}">Gérer les photos</a></li>
+    <li><a href="{{ url_for('manage_art') }}">Gérer les articles</a></li>
+    <li><a href="{{ url_for('manage_mariage') }}">Gérer les mariages</a></li>
+    <li><a href="{{ url_for('manage_activite') }}">Gérer les activités</a></li>
+    <li><a href="{{ url_for('manage_link') }}">Gérer les liens</a></li>
+    <li><a href="{{ url_for('logout') }}">Déconnexion</a></li>
+<form method="post">
+    <h3>Ajouter un VIP</h3>
+    <input type="hidden" name="action" value="add_vip">
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="text" name="prenom" placeholder="Prenom">
+    <input type="text" name="sexe" placeholder="Sexe">
+    <input type="text" name="nationalite" placeholder="Nationalité">
+    <input type="text" name="date_naissance" placeholder = "date_naissance">
+    <input type="text" name="date_deces" placeholder="date_deces">
+    <button type="submit">Ajouter</button>
+</form>
+
+<form method="post">
+    <h3>Update un VIP</h3>
+    <input type="hidden" name="action" value="update_vip">
+    <input type="number" name="id_vip" placeholder="id_vip">
+    <input type="text" name="nom" placeholder="Nom">
+    <input type="text" name="prenom" placeholder="Prenom">
+    <input type="text" name="sexe" placeholder="Sexe">
+    <input type="text" name="nationalite" placeholder="Nationalité">
+    <input type="text" name="date_naissance" placeholder = "date_naissance">
+    <input type="text" name="date_deces" placeholder="date_deces">
+    <button type="submit">Update</button>
+</form>
+
+<h3>VIP dans la base de données</h3>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>id_vip</th>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Sexe</th>
+            <th>Nationalité</th>
+            <th>Date de naissance</th>
+            <th>Date de décès</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for vip in vips %}
+    <tr>
+    <td>{{ (vip.id_vip) }}</td>
+    <td>{{ vip.nom }}</td>
+    <td>{{ vip.prenom }}</td>
+    <td>{{ vip.sexe }}</td>
+    <td>{{ vip.nationalite }}</td>
+    <td>{{ vip.date_naissance }}</td>
+    <td>{{ vip.date_deces}}</td> 
+    <td>
+        <form method="post" style="display:inline;">
+            <input type="hidden" name="action" value="delete_vip">
+            <input type="hidden" name="id_vip" value="{{ vip.id_vip }}">
+            <button type="submit" name = "delete_vip">Supprimer</button>
+        </form>
+    </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
